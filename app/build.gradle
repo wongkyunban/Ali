@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.wong.ali"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Specifies the ABI configurations of your native
+        // libraries Gradle should build and package with your APK.
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //android studio默认so文件加载目录为:src/main/jniLibs
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+    signingConfigs {
+        /**
+         * 设置你的keystore相关
+         * demo中只是一个示例，使用时请根据实际情况进行配置
+         */
+//        debug {
+//            //keystore中key的别名
+//            keyAlias 'androiddebugkey'
+//            //keystore中key的密码
+//            keyPassword 'android'
+//            //keystore的文件路径，可以是绝对路径也可以是相对路径
+//            storeFile file('../keystore/debug.keystore')
+//            //keystore的密码
+//            storePassword 'android'
+//        }
+        release {
+            //keystore中key的别名
+            keyAlias 'Ali'
+            //keystore中key的密码
+            keyPassword 'qazwsx1'
+            //keystore的文件路径，可以是绝对路径也可以是相对路径
+            storeFile file('../keystore/ali.jks')
+            //keystore的密码
+            storePassword 'qazwsx1'
+        }
+        debug {
+            //keystore中key的别名
+            keyAlias 'Ali'
+            //keystore中key的密码
+            keyPassword 'qazwsx1'
+            //keystore的文件路径，可以是绝对路径也可以是相对路径
+            storeFile file('../keystore/ali.jks')
+            //keystore的密码
+            storePassword 'qazwsx1'
+        }
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    implementation files('libs/AMap_Location_V4.5.0_20190121.jar')
+    implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
+    implementation files('libs/Android_Map3D_SDK_V6.6.0_20181221.jar')
+    implementation project(':amaplibrary')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation project(':qrcore')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
+    implementation 'cn.bingoogolapple:bga-baseadapter:1.2.9@aar'
+    implementation 'cn.bingoogolapple:bga-flowlayout:1.0.0@aar'
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    // -------------------- 以上几个库是为了方便编写演示案例添加进来的，集成到你自己项目时可以不依赖这些库 --------------------
+    // -------------------- 以下一个库是必须依赖的 ----------------------------
+    //    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
+    // -------------------- 以上一个库是必须依赖的 ----------------------------
+    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+}
